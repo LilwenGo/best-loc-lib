@@ -12,6 +12,11 @@
             "email": "pro.lilian.ortega@gmail.com"
         }
     ],
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit --color"
+        ]
+    },
     "require": {
         "mongodb/mongodb": "^1.20",
         "ext-mongodb": "*",
