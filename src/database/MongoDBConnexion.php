@@ -3,8 +3,20 @@ namespace App\Database;
 
 use Dotenv\Dotenv;
 use MongoDB\Client;
+
+/**
+ * This class is a singleton pattern for a MongoDB connexion
+ */
 class MongoDBConnexion implements Connexion {
+    /**
+     * The instance of the class containing the connexion
+     * @var MongoDBConnexion
+     */
     private static MongoDBConnexion $instance;
+    /**
+     * The database connexion
+     * @var Client
+     */
     private Client $connexion;
 
     public function __construct() {

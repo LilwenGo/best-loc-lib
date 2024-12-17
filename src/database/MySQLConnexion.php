@@ -3,8 +3,20 @@ namespace App\Database;
 
 use Dotenv\Dotenv;
 use \PDO;
+
+/**
+ * This class is a singleton pattern for a MySQL connexion
+ */
 class MySQLConnexion implements Connexion {
+    /**
+     * The instance of the class containing the connexion
+     * @var MySQLConnexion
+     */
     private static MySQLConnexion $instance;
+    /**
+     * The database connexion
+     * @var PDO
+     */
     private PDO $connexion;
 
     public function __construct() {
