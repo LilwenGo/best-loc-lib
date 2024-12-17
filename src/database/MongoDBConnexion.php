@@ -10,11 +10,11 @@ class MongoDBConnexion implements Connexion {
     public function __construct() {
         $dotenv = Dotenv::createImmutable(__DIR__);
         $dotenv->load();
-        $uri = 'mongodb://'.getenv('MDB_USER').':'.getenv('MDB_PASS').'@'.getenv('MDB_SRV').'/';
+        $uri = 'mongodb://'.$_ENV['MDB_USER'].':'.$_ENV['MDB_PASS'].'@'.$_ENV['MDB_SRV'].'/';
         $this->connexion = new Client($uri);
     }
 
-    private static function initInstance(): void {
+    public static function initInstance(): void {
         self::$instance = new MongoDBConnexion();
     }
 

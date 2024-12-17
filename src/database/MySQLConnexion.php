@@ -11,14 +11,14 @@ class MySQLConnexion implements Connexion {
         $dotenv = Dotenv::createImmutable(__DIR__);
         $dotenv->load();
         $this->connexion = new PDO(
-            'mysql:host='.getenv('MYSQL_SRV').';dbname=' . getenv('MYSQL_DBNAME') . ';charset=utf8;',
-            getenv('MYSQL_USER'),
-            getenv('MYSQL_PASS')
+            'mysql:host='.$_ENV['MYSQL_SRV'].';dbname=' . $_ENV['MYSQL_DBNAME'] . ';charset=utf8;',
+            $_ENV['MYSQL_USER'],
+            $_ENV['MYSQL_PASS']
         );
         $this->connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    private static function initInstance(): void {
+    public static function initInstance(): void {
         self::$instance = new MySQLConnexion();
     }
 
