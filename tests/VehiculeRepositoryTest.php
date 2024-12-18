@@ -48,6 +48,45 @@ final class VehiculeRepositoryTest extends TestCase {
         $this->assertEquals($km, $res->getKm(), "Document's km has not the expected value !");
     }
 
+    public static function provideGetByLicencePlateData(): array {
+        return [
+            ['6762a8c218a2321f35003980', 'Golf', 'VolksWagen', 'BX-259-AN', "C'est une break à Lyon !!!", '130000'],
+            ['6762a8c318a2321f35003983', 'EXPERT', 'Peugeot', 'TE2E75', 'Standard - Traction 1PL', '000005'],
+            ['6762a8c318a2321f35003984', 'X', 'Tesla', 'R0SIB1F', 'Trop viiiite !!!', '123456']
+        ];
+    }
+
+    #[DataProvider('provideGetByLicencePlateData')]
+    public function testGetByLicencePlate(string $id, string $model, string $brand, string $licence_plate, string $informations, string $km): void {
+        $res = $this->repository->getByLicencePlate($licence_plate);
+        $this->assertTrue($res !== false, "Document couldn't be found !");
+        $this->assertTrue(is_object($res) && get_class($res) === 'App\\Entity\\Vehicule', "Returned object is not of expected type !");
+        $this->assertEquals($id, $res->getId()->__tostring(), "Document's id has not the expected value !");
+        $this->assertEquals($model, $res->getModel(), "Document's model has not the expected value !");
+        $this->assertEquals($brand, $res->getBrand(), "Document's brand has not the expected value !");
+        $this->assertEquals($licence_plate, $res->getLicence_plate(), "Document's licence_plate has not the expected value !");
+        $this->assertEquals($informations, $res->getInformations(), "Document's informations has not the expected value !");
+        $this->assertEquals($km, $res->getKm(), "Document's km has not the expected value !");
+    }
+
+    public static function provideCountByKmFloorData(): array {
+        return [
+            ['130000', 1, 3],
+            ['000005', -1, 0],
+            ['123456', 1, 6]
+        ];
+    }
+
+    #[DataProvider('provideCountByKmFloorData')]
+    public function testCountByKmFloor(string $km, int $comparator, int $expected): void {
+        $res = $this->repository->countByKm($km, $comparator);
+        $total = 0;
+        foreach($res as $document) {
+            $total = $document['total'];
+        }
+        $this->assertEquals($expected, $total, "Documents count has not the expected value !");
+    }
+
     public static function provideUpdateData(): array {
         return [
             ['6762a99488513600be03da50', 'Golf', 'VolksWagen', 'BX-259-AN', "C'est une break à Lyon !!!", ''.time()],

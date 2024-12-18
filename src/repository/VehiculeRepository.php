@@ -22,6 +22,28 @@ class VehiculeRepository {
     public function find(ObjectId $id): ?Vehicule {
         return MongoDBConnexion::getInstance()->getConnexion()->selectCollection($this->database, 'vehicules')->findOne(['_id' => $id]);
     }
+    
+    public function getByLicencePlate(string $licence_plate): ?Vehicule {
+        return MongoDBConnexion::getInstance()->getConnexion()->selectCollection($this->database, 'vehicules')->findOne(['licence_plate' => $licence_plate]);
+    }
+
+    public function countByKm(string $km, int $comparator) {
+        return MongoDBConnexion::getInstance()->getConnexion()->selectCollection($this->database, 'vehicules')->aggregate([
+            [
+                '$addFields' => [
+                    'km_num' => ['$toInt' => '$km']
+                ]
+            ],
+            [
+                '$match' => [
+                    'km_num' => [$comparator > 0 ? '$gt' : '$lt' => intval($km)]
+                ]
+            ],
+            [
+                '$count' => 'total'
+            ]
+        ]);
+    }
 
     public function create(string $model, string $brand, string $licence_plate, string $informations, string $km): array {
         $vehicule = new Vehicule($model, $brand, $licence_plate, $informations, $km);
