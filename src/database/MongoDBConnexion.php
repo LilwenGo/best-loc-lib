@@ -20,7 +20,7 @@ class MongoDBConnexion implements Connexion {
     private Client $connexion;
 
     public function __construct() {
-        $dotenv = Dotenv::createImmutable(__DIR__);
+        $dotenv = Dotenv::createImmutable(__DIR__.'/../..');
         $dotenv->load();
         $uri = 'mongodb://'.$_ENV['MDB_USER'].':'.$_ENV['MDB_PASS'].'@'.$_ENV['MDB_SRV'].'/';
         $this->connexion = new Client($uri);

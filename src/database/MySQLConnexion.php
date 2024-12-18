@@ -20,7 +20,7 @@ class MySQLConnexion implements Connexion {
     private PDO $connexion;
 
     public function __construct() {
-        $dotenv = Dotenv::createImmutable(__DIR__);
+        $dotenv = Dotenv::createImmutable(__DIR__.'/../..');
         $dotenv->load();
         $this->connexion = new PDO(
             'mysql:host='.$_ENV['MYSQL_SRV'].';dbname=' . $_ENV['MYSQL_DBNAME'] . ';charset=utf8;',
