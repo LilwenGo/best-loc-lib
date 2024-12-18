@@ -18,4 +18,6 @@ CREATE TABLE billing (
     CONSTRAINT fk_billing_contract_id 
     FOREIGN KEY (contract_id)
     REFERENCES contract (id)
+    ON UPDATE restrict
+    ON DELETE cascade
 )ENGINE=InnoDB;
