@@ -14,6 +14,7 @@ class Customer implements Persistable {
     private string $permit_number;
 
     public function __construct($first_name, $last_name, $address, $email, $password, $permit_number) {
+        $this->id = new ObjectId();
         $this->first_name = $first_name;
         $this->last_name = $last_name;
         $this->address = $address;

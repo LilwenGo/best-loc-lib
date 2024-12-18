@@ -13,6 +13,7 @@ class Vehicule implements Persistable {
     private string $km;
 
     public function __construct($model, $brand, $licence_plate, $informations, $km) {
+        $this->id = new ObjectId();
         $this->model = $model;
         $this->brand = $brand;
         $this->licence_plate = $licence_plate;
@@ -44,23 +45,23 @@ class Vehicule implements Persistable {
         return $this->id;
     }
 
-    public function getFirstName(): string {
+    public function getModel(): string {
         return $this->model;
     }
 
-    public function getLastName(): string {
+    public function getBrand(): string {
         return $this->brand;
     }
 
-    public function getlicence_plate(): string {
+    public function getLicence_plate(): string {
         return $this->licence_plate;
     }
 
-    public function getinformations(): string {
+    public function getInformations(): string {
         return $this->informations;
     }
 
-    public function getkm(): string {
+    public function getKm(): string {
         return $this->km;
     }
 
@@ -84,7 +85,7 @@ class Vehicule implements Persistable {
         $this->informations = $informations;
     }
 
-    public function setkm(string $km): void {
+    public function setKm(string $km): void {
         $this->km = $km;
     }
 }
