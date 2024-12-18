@@ -49,11 +49,33 @@ final class CustomerRepositoryTest extends TestCase {
         $this->assertEquals($permit_number, $res->getPermitNumber(), "Document's permit_number has not the expected value !");
     }
 
+    public static function provideGetByEmailData(): array {
+        return [
+            ['67628a98f70f8304660363c0', 'Lilian', 'Ortega', '4 rue Casimir Périer', 'lilian@areastudio.fr', 'motdepasse1734516010', '00000000'],
+            ['67628a98f70f8304660363c3', 'Ethan', 'Paleyron', 'Très loin', 'epayleyron@edenschool.fr', 'motdepasse1734516010', '00000001'],
+            ['67628a98f70f8304660363c4', 'Joshua', 'Jorge-Beau', 'Moins loin', 'jjorgebeau.pro@gmail.com', 'motdepasse1734516010', '00000002']
+        ];
+    }
+
+    #[DataProvider('provideGetByEmailData')]
+    public function testGetByEmail(string $id, string $first_name, string $last_name, string $address, string $email, string $password, string $permit_number): void {
+        $res = $this->repository->getByEmail($email);
+        $this->assertTrue($res !== false, "Document couldn't be found !");
+        $this->assertTrue(is_object($res) && get_class($res) === 'App\\Entity\\Customer', "Returned object is not of expected type !");
+        $this->assertEquals($id, $res->getId()->__tostring(), "Document's id has not the expected value !");
+        $this->assertEquals($first_name, $res->getFirstName(), "Document's first name has not the expected value !");
+        $this->assertEquals($last_name, $res->getLastName(), "Document's last name has not the expected value !");
+        $this->assertEquals($address, $res->getAddress(), "Document's address has not the expected value !");
+        $this->assertEquals($email, $res->getEmail(), "Document's email has not the expected value !");
+        $this->assertEquals($password, $res->getPassword(), "Document's password has not the expected value !");
+        $this->assertEquals($permit_number, $res->getPermitNumber(), "Document's permit_number has not the expected value !");
+    }
+
     public static function provideUpdateData(): array {
         return [
-            ['67628a98f70f8304660363c0', 'Lilian', 'Ortega', '4 rue Casimir Périer', 'lilian@areastudio.fr', 'motdepasse'.time(), '00000000'],
-            ['67628a98f70f8304660363c3', 'Ethan', 'Paleyron', 'Très loin', 'epayleyron@edenschool.fr', 'motdepasse'.time(), '00000001'],
-            ['67628a98f70f8304660363c4', 'Joshua', 'Jorge-Beau', 'Moins loin', 'jjorgebeau.pro@gmail.com', 'motdepasse'.time(), '00000002']
+            ['67629c94e8f64dd31b0d4120', 'Lilian', 'Ortega', '4 rue Casimir Périer', 'lilian@areastudio.fr', 'motdepasse'.time(), '00000000'],
+            ['67629c94e8f64dd31b0d4123', 'Ethan', 'Paleyron', 'Très loin', 'epayleyron@edenschool.fr', 'motdepasse'.time(), '00000001'],
+            ['67629c94e8f64dd31b0d4124', 'Joshua', 'Jorge-Beau', 'Moins loin', 'jjorgebeau.pro@gmail.com', 'motdepasse'.time(), '00000002']
         ];
     }
 

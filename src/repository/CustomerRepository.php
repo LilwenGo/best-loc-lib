@@ -22,6 +22,10 @@ class CustomerRepository {
     public function find(ObjectId $id): ?Customer {
         return MongoDBConnexion::getInstance()->getConnexion()->selectCollection($this->database, 'customers')->findOne(['_id' => $id]);
     }
+    
+    public function getByEmail(string $email): ?Customer {
+        return MongoDBConnexion::getInstance()->getConnexion()->selectCollection($this->database, 'customers')->findOne(['email' => $email]);
+    }
 
     public function create(string $first_name, string $last_name, string $adress, string $email, string $password, string $permit_number): array {
         $customer = new Customer($first_name, $last_name, $adress, $email, $password, $permit_number);
