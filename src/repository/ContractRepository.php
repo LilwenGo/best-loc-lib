@@ -48,7 +48,7 @@ class ContractRepository {
     }
     
     public function countLocLatesPerCustomer(): array {
-        $stmt = MySQLConnexion::getInstance()->getConnexion()->query("SELECT COUNT(*) AS total FROM (SELECT * FROM contract WHERE loc_begin_date IS NOT NULL) cl WHERE loc_begin_date IS NOT NULL AND TIMESTAMPDIFF(HOUR, loc_end_date, IFNULL(returning_date, NOW())) > 1 GROUP BY customer_uid");
+        $stmt = MySQLConnexion::getInstance()->getConnexion()->query("SELECT customer_uid, COUNT(*) AS total FROM (SELECT * FROM contract WHERE loc_begin_date IS NOT NULL) cl WHERE loc_begin_date IS NOT NULL AND TIMESTAMPDIFF(HOUR, loc_end_date, IFNULL(returning_date, NOW())) > 1 GROUP BY customer_uid");
         return $stmt->fetchAll();
     }
 
