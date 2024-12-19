@@ -79,9 +79,9 @@ class ContractRepository {
         string $vehicule_uid, 
         string $customer_uid, 
         DateTime $sign_date, 
-        DateTime $loc_begin_date, 
-        DateTime $loc_end_date, 
-        DateTime $returning_date, 
+        ?DateTime $loc_begin_date, 
+        ?DateTime $loc_end_date, 
+        ?DateTime $returning_date, 
         float $price
     ): array {
         $stmt = MySQLConnexion::getInstance()->getConnexion()->prepare("INSERT INTO contract(vehicule_uid, customer_uid, sign_date, loc_begin_date, loc_end_date, returning_date, price) VALUES (?,?,?,?,?,?,?)");
@@ -89,9 +89,9 @@ class ContractRepository {
             $vehicule_uid,
             $customer_uid,
             $sign_date->format('Y-m-d H:i:s'),
-            $loc_begin_date->format('Y-m-d H:i:s'),
-            $loc_end_date->format('Y-m-d H:i:s'),
-            $returning_date->format('Y-m-d H:i:s'),
+            !is_null($loc_begin_date) ? $loc_begin_date->format('Y-m-d H:i:s') : null,
+            !is_null($loc_end_date) ? $loc_end_date->format('Y-m-d H:i:s') : null,
+            !is_null($returning_date) ? $returning_date->format('Y-m-d H:i:s') : null,
             $price
         ]);
         return [
@@ -105,9 +105,9 @@ class ContractRepository {
         string $vehicule_uid, 
         string $customer_uid, 
         DateTime $sign_date, 
-        DateTime $loc_begin_date, 
-        DateTime $loc_end_date, 
-        DateTime $returning_date, 
+        ?DateTime $loc_begin_date, 
+        ?DateTime $loc_end_date, 
+        ?DateTime $returning_date, 
         float $price
     ): bool {
         $stmt = MySQLConnexion::getInstance()->getConnexion()->prepare("UPDATE contract SET vehicule_uid = ?, customer_uid = ?, sign_date = ?, loc_begin_date = ?, loc_end_date = ?, returning_date = ?, price = ? WHERE id = ?");
@@ -115,9 +115,9 @@ class ContractRepository {
             $vehicule_uid,
             $customer_uid,
             $sign_date->format('Y-m-d H:i:s'),
-            $loc_begin_date->format('Y-m-d H:i:s'),
-            $loc_end_date->format('Y-m-d H:i:s'),
-            $returning_date->format('Y-m-d H:i:s'),
+            !is_null($loc_begin_date) ? $loc_begin_date->format('Y-m-d H:i:s') : null,
+            !is_null($loc_end_date) ? $loc_end_date->format('Y-m-d H:i:s') : null,
+            !is_null($returning_date) ? $returning_date->format('Y-m-d H:i:s') : null,
             $price,
             $id
         ]);
