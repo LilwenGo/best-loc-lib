@@ -5,9 +5,9 @@ CREATE TABLE contract (
     vehicule_uid VARCHAR(255) NOT NULL,
     customer_uid VARCHAR(255) NOT NULL,
     sign_date DATETIME NOT NULL,
-    loc_begin_date DATETIME NOT NULL,
-    loc_end_date DATETIME NOT NULL,
-    returning_date DATETIME NOT NULL,
+    loc_begin_date DATETIME,
+    loc_end_date DATETIME,
+    returning_date DATETIME,
     price DECIMAL(10,4) NOT NULL
 )ENGINE=InnoDB;
 
