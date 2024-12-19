@@ -15,6 +15,14 @@ class BillingRepository {
         return $stmt->fetch();
     }
 
+    public function getByContract(int $contract_id): array {
+        $stmt = MySQLConnexion::getInstance()->getConnexion()->prepare("SELECT * FROM billing WHERE contract_id = ?");
+        $stmt->execute([
+            $contract_id
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Billing::class);
+    }
+
     public function all(): array {
         $stmt = MySQLConnexion::getInstance()->getConnexion()->query("SELECT * FROM billing");
         return $stmt->fetchAll(PDO::FETCH_CLASS, Billing::class);

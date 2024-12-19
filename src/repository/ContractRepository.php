@@ -16,8 +16,62 @@ class ContractRepository {
         return $stmt->fetch();
     }
 
+    public function getByCustomer(string $customer_uid): array {
+        $stmt = MySQLConnexion::getInstance()->getConnexion()->prepare("SELECT * FROM contract WHERE customer_uid = ?");
+        $stmt->execute([
+            $customer_uid
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Contract::class);
+    }
+
+    public function getByVehicule(string $vehicule_uid): array {
+        $stmt = MySQLConnexion::getInstance()->getConnexion()->prepare("SELECT * FROM contract WHERE vehicule_uid = ?");
+        $stmt->execute([
+            $vehicule_uid
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Contract::class);
+    }
+
+    public function getLocLates(): array {
+        $stmt = MySQLConnexion::getInstance()->getConnexion()->query("SELECT * FROM (SELECT * FROM contract WHERE loc_begin_date IS NOT NULL) cl WHERE loc_begin_date IS NOT NULL AND TIMESTAMPDIFF(HOUR, loc_end_date, IFNULL(returning_date, NOW())) > 1");
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Contract::class);
+    }
+
+    public function countLocLatesByDates(DateTime $date1, DateTime $date2): int {
+        $stmt = MySQLConnexion::getInstance()->getConnexion()->prepare("SELECT COUNT(*) AS total FROM (SELECT * FROM contract WHERE loc_begin_date IS NOT NULL) cl WHERE loc_begin_date IS NOT NULL AND TIMESTAMPDIFF(HOUR, loc_end_date, IFNULL(returning_date, NOW())) > 1 AND loc_end_date BETWEEN ? AND ?");
+        $stmt->execute([
+            $date1->format('Y-m-d H:i:s'),
+            $date2->format('Y-m-d H:i:s')
+        ]);
+        $data = $stmt->fetch();
+        return $data ? $data['total'] : 0;
+    }
+    
+    public function countLocLatesPerCustomer(): array {
+        $stmt = MySQLConnexion::getInstance()->getConnexion()->query("SELECT COUNT(*) AS total FROM (SELECT * FROM contract WHERE loc_begin_date IS NOT NULL) cl WHERE loc_begin_date IS NOT NULL AND TIMESTAMPDIFF(HOUR, loc_end_date, IFNULL(returning_date, NOW())) > 1 GROUP BY customer_uid");
+        return $stmt->fetchAll();
+    }
+
+    public function getCurrentLocations(string $customer_uid): array {
+        $stmt = MySQLConnexion::getInstance()->getConnexion()->prepare("SELECT * FROM contract WHERE customer_uid = ? AND loc_begin_date IS NOT NULL AND returning_date IS NULL");
+        $stmt->execute([
+            $customer_uid
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Contract::class);
+    }
+
     public function all(): array {
         $stmt = MySQLConnexion::getInstance()->getConnexion()->query("SELECT * FROM contract");
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Contract::class);
+    }
+
+    public function allSortedByCustomer(): array {
+        $stmt = MySQLConnexion::getInstance()->getConnexion()->query("SELECT * FROM contract ORDER BY customer_uid");
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Contract::class);
+    }
+
+    public function allSortedByVehicule(): array {
+        $stmt = MySQLConnexion::getInstance()->getConnexion()->query("SELECT * FROM contract ORDER BY vehicule_uid");
         return $stmt->fetchAll(PDO::FETCH_CLASS, Contract::class);
     }
 
