@@ -1,9 +1,9 @@
 <?php
-namespace App\Tests;
+namespace BestLocLib\Tests;
 
-use App\Database\MySQLConnexion;
-use App\Repository\BillingRepository;
-use App\Repository\CustomerRepository;
+use BestLocLib\Database\MySQLConnexion;
+use BestLocLib\Repository\BillingRepository;
+use BestLocLib\Repository\CustomerRepository;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 

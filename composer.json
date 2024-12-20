@@ -1,9 +1,9 @@
 {
-    "name": "lilia/best-loc",
+    "name": "lilian/best-loc-lib",
     "type": "library",
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "BestLocLib\\": "src/"
         }
     },
     "authors": [

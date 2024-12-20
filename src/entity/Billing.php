@@ -1,5 +1,5 @@
 <?php
-namespace App\Entity;
+namespace BestLocLib\Entity;
 
 class Billing {
     private int $id;

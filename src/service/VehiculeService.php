@@ -1,9 +1,9 @@
 <?php
-namespace App\Service;
+namespace BestLocLib\Service;
 
 use MongoDB\BSON\ObjectId;
-use App\Entity\Vehicule;
-use App\Repository\VehiculeRepository;
+use BestLocLib\Entity\Vehicule;
+use BestLocLib\Repository\VehiculeRepository;
 
 /**
  * This class allows us to interact with the VehiculeRepository

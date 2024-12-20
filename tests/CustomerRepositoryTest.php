@@ -1,7 +1,7 @@
 <?php
-namespace App\Tests;
+namespace BestLocLib\Tests;
 
-use App\Repository\CustomerRepository;
+use BestLocLib\Repository\CustomerRepository;
 use MongoDB\BSON\ObjectId;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -40,7 +40,7 @@ final class CustomerRepositoryTest extends TestCase {
     public function testFind(string $id, string $first_name, string $last_name, string $address, string $email, string $password, string $permit_number): void {
         $res = $this->repository->find(new ObjectId($id));
         $this->assertTrue($res !== false, "Document couldn't be found !");
-        $this->assertTrue(is_object($res) && get_class($res) === 'App\\Entity\\Customer', "Returned object is not of expected type !");
+        $this->assertTrue(is_object($res) && get_class($res) === 'BestLocLib\\Entity\\Customer', "Returned object is not of expected type !");
         $this->assertEquals($first_name, $res->getFirstName(), "Document's first name has not the expected value !");
         $this->assertEquals($last_name, $res->getLastName(), "Document's last name has not the expected value !");
         $this->assertEquals($address, $res->getAddress(), "Document's address has not the expected value !");
@@ -61,7 +61,7 @@ final class CustomerRepositoryTest extends TestCase {
     public function testGetByEmail(string $id, string $first_name, string $last_name, string $address, string $email, string $password, string $permit_number): void {
         $res = $this->repository->getByEmail($email);
         $this->assertTrue($res !== false, "Document couldn't be found !");
-        $this->assertTrue(is_object($res) && get_class($res) === 'App\\Entity\\Customer', "Returned object is not of expected type !");
+        $this->assertTrue(is_object($res) && get_class($res) === 'BestLocLib\\Entity\\Customer', "Returned object is not of expected type !");
         $this->assertEquals($id, $res->getId()->__tostring(), "Document's id has not the expected value !");
         $this->assertEquals($first_name, $res->getFirstName(), "Document's first name has not the expected value !");
         $this->assertEquals($last_name, $res->getLastName(), "Document's last name has not the expected value !");

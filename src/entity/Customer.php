@@ -1,5 +1,5 @@
 <?php
-namespace App\Entity;
+namespace BestLocLib\Entity;
 
 use MongoDB\BSON\ObjectId;
 use MongoDB\BSON\Persistable;

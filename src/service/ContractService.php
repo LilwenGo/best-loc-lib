@@ -1,9 +1,9 @@
 <?php
-namespace App\Service;
+namespace BestLocLib\Service;
 
-use App\Entity\Contract;
-use App\Repository\BillingRepository;
-use App\Repository\ContractRepository;
+use BestLocLib\Entity\Contract;
+use BestLocLib\Repository\BillingRepository;
+use BestLocLib\Repository\ContractRepository;
 use \DateTime;
 
 /**

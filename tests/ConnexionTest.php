@@ -1,8 +1,8 @@
 <?php
-namespace App\Tests;
+namespace BestLocLib\Tests;
 
-use App\Database\MongoDBConnexion;
-use App\Database\MySQLConnexion;
+use BestLocLib\Database\MongoDBConnexion;
+use BestLocLib\Database\MySQLConnexion;
 use PHPUnit\Framework\TestCase;
 
 final class ConnexionTest extends TestCase {

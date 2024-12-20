@@ -1,8 +1,8 @@
 <?php
-namespace App\Repository;
+namespace BestLocLib\Repository;
 
-use App\Database\MongoDBConnexion;
-use App\Entity\Vehicule;
+use BestLocLib\Database\MongoDBConnexion;
+use BestLocLib\Entity\Vehicule;
 use MongoDB\BSON\ObjectId;
 use Dotenv\Dotenv;
 use MongoDB\Driver\CursorInterface;

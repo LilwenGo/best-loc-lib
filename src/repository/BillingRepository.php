@@ -1,8 +1,8 @@
 <?php
-namespace App\Repository;
+namespace BestLocLib\Repository;
 
-use App\Database\MySQLConnexion;
-use App\Entity\Billing;
+use BestLocLib\Database\MySQLConnexion;
+use BestLocLib\Entity\Billing;
 use \PDO;
 
 /**

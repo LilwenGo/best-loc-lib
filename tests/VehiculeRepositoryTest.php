@@ -1,7 +1,7 @@
 <?php
-namespace App\Tests;
+namespace BestLocLib\Tests;
 
-use App\Repository\VehiculeRepository;
+use BestLocLib\Repository\VehiculeRepository;
 use MongoDB\BSON\ObjectId;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -40,7 +40,7 @@ final class VehiculeRepositoryTest extends TestCase {
     public function testFind(string $id, string $model, string $brand, string $licence_plate, string $informations, string $km): void {
         $res = $this->repository->find(new ObjectId($id));
         $this->assertTrue($res !== false, "Document couldn't be found !");
-        $this->assertTrue(is_object($res) && get_class($res) === 'App\\Entity\\Vehicule', "Returned object is not of expected type !");
+        $this->assertTrue(is_object($res) && get_class($res) === 'BestLocLib\\Entity\\Vehicule', "Returned object is not of expected type !");
         $this->assertEquals($model, $res->getModel(), "Document's model has not the expected value !");
         $this->assertEquals($brand, $res->getBrand(), "Document's brand has not the expected value !");
         $this->assertEquals($licence_plate, $res->getLicence_plate(), "Document's licence_plate has not the expected value !");
@@ -60,7 +60,7 @@ final class VehiculeRepositoryTest extends TestCase {
     public function testGetByLicencePlate(string $id, string $model, string $brand, string $licence_plate, string $informations, string $km): void {
         $res = $this->repository->getByLicencePlate($licence_plate);
         $this->assertTrue($res !== false, "Document couldn't be found !");
-        $this->assertTrue(is_object($res) && get_class($res) === 'App\\Entity\\Vehicule', "Returned object is not of expected type !");
+        $this->assertTrue(is_object($res) && get_class($res) === 'BestLocLib\\Entity\\Vehicule', "Returned object is not of expected type !");
         $this->assertEquals($id, $res->getId()->__tostring(), "Document's id has not the expected value !");
         $this->assertEquals($model, $res->getModel(), "Document's model has not the expected value !");
         $this->assertEquals($brand, $res->getBrand(), "Document's brand has not the expected value !");

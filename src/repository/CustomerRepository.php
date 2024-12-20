@@ -1,8 +1,8 @@
 <?php
-namespace App\Repository;
+namespace BestLocLib\Repository;
 
-use App\Database\MongoDBConnexion;
-use App\Entity\Customer;
+use BestLocLib\Database\MongoDBConnexion;
+use BestLocLib\Entity\Customer;
 use MongoDB\BSON\ObjectId;
 use Dotenv\Dotenv;
 

@@ -1,8 +1,8 @@
 <?php
-namespace App\Service;
+namespace BestLocLib\Service;
 
-use App\Entity\Customer;
-use App\Repository\CustomerRepository;
+use BestLocLib\Entity\Customer;
+use BestLocLib\Repository\CustomerRepository;
 use MongoDB\BSON\ObjectId;
 
 /**

@@ -1,5 +1,5 @@
 <?php
-namespace App\Database;
+namespace BestLocLib\Database;
 
 /**
  * This interface set the needed methods for a database connexion with a singleton pattern

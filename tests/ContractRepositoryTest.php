@@ -1,8 +1,8 @@
 <?php
-namespace App\Tests;
+namespace BestLocLib\Tests;
 
-use App\Repository\ContractRepository;
-use App\Database\MySQLConnexion;
+use BestLocLib\Repository\ContractRepository;
+use BestLocLib\Database\MySQLConnexion;
 use DateInterval;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;

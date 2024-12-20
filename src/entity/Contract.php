@@ -1,5 +1,5 @@
 <?php
-namespace App\Entity;
+namespace BestLocLib\Entity;
 
 use \DateTime;
 class Contract {
